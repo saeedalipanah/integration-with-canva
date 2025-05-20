@@ -29,10 +29,10 @@ export default {
 
       // نمونه درخواست به سرور (آدرس و روش را با سرورت هماهنگ کن)
       console.log({ code })
-      const response = await fetch('/api/canva/exchange-token', {
+      const response = await fetch('https://api.canva.com/rest/v1/oauth/token', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(`grant_type=${code}&code=${code}`),
       })
 
       if (!response.ok) throw new Error('خطا در تبادل توکن')
