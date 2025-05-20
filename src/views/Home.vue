@@ -3,6 +3,8 @@
     <h1>شروع طراحی با Canva</h1>
     <button @click="startCanva">ویرایش با Canva</button>
   </div>
+  <RouterLink to="/return-navigation">return navigation</RouterLink>-------------
+  <RouterLink to="/auth-callback">auth callback</RouterLink>
 </template>
 <script setup lang="ts">
 const startCanva = async () => {
