@@ -9,8 +9,8 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
-    { path: '/auth-callback', component: () => import('../views/AuthCallback.vue') },
-    { path: '/return-navigation', component: () => import('../views/ReturnNavigation.vue') },
+    { path: '/auth-callback', component: () => import('../views/AuthCallback.vue' as any) },
+    { path: '/return-navigation', component: () => import('../views/ReturnNavigation.vue' as any) },
   ],
 })
 
