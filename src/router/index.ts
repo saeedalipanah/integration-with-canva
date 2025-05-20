@@ -4,7 +4,7 @@ import HomeView from '../views/Home.vue'
 import AuthCallback from '../views/AuthCallback.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
