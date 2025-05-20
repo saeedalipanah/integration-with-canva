@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>helllllllllllllllllllllllllllllllllllo</h1>
     <h2>در حال پردازش ورود...</h2>
     <p v-if="error">{{ error }}</p>
   </div>
@@ -13,6 +14,7 @@ export default {
     }
   },
   async mounted() {
+    console.log('mounted')
     const urlParams = new URLSearchParams(window.location.search)
     const code = urlParams.get('code')
 
@@ -26,6 +28,7 @@ export default {
       // برای نمونه، فرض می‌کنیم سرور API ای دارد که توکن را می‌گیرد و دسترسی می‌دهد
 
       // نمونه درخواست به سرور (آدرس و روش را با سرورت هماهنگ کن)
+      console.log({ code })
       const response = await fetch('/api/canva/exchange-token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,6 +46,7 @@ export default {
       // هدایت به صفحه طراحی یا Return Navigation
       this.$router.push('/return-navigation')
     } catch (err) {
+      console.log({ err })
       this.error = err.message
     }
   },
