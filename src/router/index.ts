@@ -6,7 +6,7 @@ import AuthCallback from '../views/AuthCallback.vue'
 import ReturnNavigation from '../views/ReturnNavigation.vue'
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
