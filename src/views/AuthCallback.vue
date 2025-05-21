@@ -26,12 +26,13 @@ export default {
     const client_id = 'OC-AZbnBvE3oLbV'
     const client_secret = 'cnvcaA1nKcNZ8K3nKnr9DGbGR83CJFUpDhDizhweHGFSGBHoe59eb519'
 
+    const codeVerifier = localStorage.getItem('canva_code_verifier')
+    console.log({ codeVerifier })
+
     // ساخت Base64 برای client_id:client_secret
     const credentials = btoa(`${client_id}:${client_secret}`)
-    console.log({ credentials })
 
     try {
-      console.log({ code })
       const response = await fetch('https://api.canva.com/rest/v1/oauth/token', {
         method: 'POST',
         headers: {
@@ -41,6 +42,7 @@ export default {
         body: new URLSearchParams({
           grant_type: 'authorization_code',
           code: code,
+          code_verifier: codeVerifier,
         }),
       })
 
