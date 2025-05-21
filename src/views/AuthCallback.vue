@@ -24,7 +24,7 @@ export default {
 
     // مقدارهای واقعی خودتان را جایگزین کنید
     const client_id = 'OC-AZbnBvE3oLbV'
-    const client_secret = 'cnvcaA1nKcNZ8K3nKnr9DGbGR83CJFUpDhDizhweHGFSGBHoe59eb519'
+    const client_secret = 'cnvcaycSSQ3rnR36MIXpKoXTcBaWS9mP2BnJC_9vNNl0qeXUef0de549'
 
     const codeVerifier = localStorage.getItem('canva_code_verifier')
     console.log({ codeVerifier })
