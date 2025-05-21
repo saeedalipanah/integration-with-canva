@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>helllllllllllllllllllllllllllllllllllo</h1>
     <h2>در حال پردازش ورود...</h2>
     <p v-if="error">{{ error }}</p>
   </div>
@@ -23,15 +22,11 @@ export default {
     }
 
     try {
-      // اینجا باید با سرور خودت تبادل توکن کنی
-      // برای نمونه، فرض می‌کنیم سرور API ای دارد که توکن را می‌گیرد و دسترسی می‌دهد
-
-      // نمونه درخواست به سرور (آدرس و روش را با سرورت هماهنگ کن)
       console.log({ code })
       const response = await fetch('https://api.canva.com/rest/v1/oauth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(`grant_type=${code}`),
+        body: new URLSearchParams(`code=${code}`),
       })
 
       if (!response.ok) throw new Error('خطا در تبادل توکن')
@@ -42,7 +37,6 @@ export default {
       // ذخیره توکن در localStorage یا state مدیریت شده
       localStorage.setItem('canva_access_token', accessToken)
 
-      // هدایت به صفحه طراحی یا Return Navigation
       this.$router.push('/return-navigation')
     } catch (err) {
       console.log({ err })
