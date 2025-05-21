@@ -42,8 +42,6 @@ export default {
           grant_type: 'authorization_code',
           code: code,
           code_verifier: codeVerifier,
-          client_id: client_id,
-          client_secret: client_secret,
         }),
       })
 
