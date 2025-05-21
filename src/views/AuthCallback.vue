@@ -14,7 +14,6 @@ export default {
     }
   },
   async mounted() {
-    console.log('mounted')
     const urlParams = new URLSearchParams(window.location.search)
     const code = urlParams.get('code')
 
@@ -32,7 +31,7 @@ export default {
       const response = await fetch('https://api.canva.com/rest/v1/oauth/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(`grant_type=${code}&code=${code}`),
+        body: new URLSearchParams(`grant_type=${code}`),
       })
 
       if (!response.ok) throw new Error('خطا در تبادل توکن')
