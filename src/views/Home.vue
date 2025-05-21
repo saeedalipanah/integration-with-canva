@@ -7,16 +7,43 @@
   <RouterLink to="/auth-callback">auth callback</RouterLink>
 </template>
 <script setup lang="ts">
+function base64UrlEncode(buffer: ArrayBuffer): string {
+  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '')
+}
+
+async function sha256(plain: string): Promise<ArrayBuffer> {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(plain)
+  return await crypto.subtle.digest('SHA-256', data)
+}
+
+function generateCodeVerifier(length = 128): string {
+  const array = new Uint8Array(length)
+  crypto.getRandomValues(array)
+  return base64UrlEncode(array.buffer)
+}
+
+async function generateCodeChallenge(codeVerifier: string): Promise<string> {
+  const hashed = await sha256(codeVerifier)
+  return base64UrlEncode(hashed)
+}
 const startCanva = async () => {
-  console.log(crypto)
-  // const codeVerifier = crypto.randomBytes(96).toString('base64url')
-  // const codeChallenge = crypto.createHash('sha256').update(codeVerifier).digest('base64url')
-  // const clientId = 'OC-AZbnBvE3oLbV' // کلاینت آیدی از کانوا
-  // const redirectUri = window.location.origin + '/auth-callback'
+  const codeVerifier = generateCodeVerifier()
+  const codeChallenge = await generateCodeChallenge(codeVerifier)
+  console.log({ codeVerifier, codeChallenge })
 
-  // const canvaUrl = `https://www.canva.com/api/oauth/authorize?code_challenge=<code challenge string>&code_challenge_method=s256&scope=<list of scopes>&response_type=code&client_id=${clientId}&state=<optional state>&redirect_uri=${redirectUri}`
-  const canvaUrl = `https://www.canva.com/api/oauth/authorize?code_challenge_method=s256&response_type=code&client_id=OC-AZbnBvE3oLbV&redirect_uri=https%3A%2F%2Fintegration-with-canva.vercel.app%2Fauth-callback&scope=app:read%20app:write%20design:meta:read%20folder:write%20design:content:write%20design:permission:read%20design:permission:write%20comment:read%20folder:permission:read%20folder:permission:write%20profile:read%20comment:write%20design:content:read%20folder:read%20brandtemplate:meta:read%20brandtemplate:content:read%20asset:read%20asset:write&code_challenge=<CODE_CHALLENGE>`
+  const clientId = 'OC-AZbnBvE3oLbV'
+  const redirectUri = encodeURIComponent('https://integration-with-canva.vercel.app/auth-callback')
+  const scope = encodeURIComponent(
+    'app:read app:write design:meta:read folder:write design:content:write design:permission:read design:permission:write comment:read folder:permission:read folder:permission:write profile:read comment:write design:content:read folder:read brandtemplate:meta:read brandtemplate:content:read asset:read asset:write',
+  )
+  const canvaUrl = `https://www.canva.com/api/oauth/authorize?code_challenge_method=s256&response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&code_challenge=${codeChallenge}`
 
+  console.log({ canvaUrl })
+  localStorage.setItem('canva_code_verifier', codeVerifier)
   window.location.href = canvaUrl
 }
 </script>

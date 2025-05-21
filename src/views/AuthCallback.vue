@@ -13,6 +13,7 @@ export default {
     }
   },
   async mounted() {
+    console.log('mounted')
     const urlParams = new URLSearchParams(window.location.search)
     const code = urlParams.get('code')
 
@@ -27,6 +28,7 @@ export default {
 
     // ساخت Base64 برای client_id:client_secret
     const credentials = btoa(`${client_id}:${client_secret}`)
+    console.log({ credentials })
 
     try {
       console.log({ code })
