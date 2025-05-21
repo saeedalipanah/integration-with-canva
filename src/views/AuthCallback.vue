@@ -22,8 +22,8 @@ export default {
     }
 
     // مقدارهای واقعی خودتان را جایگزین کنید
-    const client_id = 'YOUR_CLIENT_ID'
-    const client_secret = 'YOUR_CLIENT_SECRET'
+    const client_id = 'OC-AZbnBvE3oLbV'
+    const client_secret = 'cnvcaPg60exs9EI871ZV5Zpo4lEo9PqZkqqUQ0-fXT7eb0c8f3cd441f'
     const redirect_uri = 'YOUR_REGISTERED_REDIRECT_URI'
     const code_verifier = 'YOUR_CODE_VERIFIER' // این مقدار رو باید موقع شروع OAuth ساختید و نگه دارید
 
@@ -36,6 +36,7 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Basic ${credentials}`,
         },
         body: new URLSearchParams({
           grant_type: 'authorization_code',
