@@ -37,7 +37,6 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Basic ${credentials}`,
         },
         body: new URLSearchParams({
           grant_type: 'authorization_code',
