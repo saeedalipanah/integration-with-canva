@@ -23,9 +23,7 @@ export default {
 
     // مقدارهای واقعی خودتان را جایگزین کنید
     const client_id = 'OC-AZbnBvE3oLbV'
-    const client_secret = 'cnvca9RovTJk8UIqtlJWIQQ6_2cpRZCjxPFxdvpB5gzkxBQI3df61135'
-    const redirect_uri = 'YOUR_REGISTERED_REDIRECT_URI'
-    const code_verifier = 'YOUR_CODE_VERIFIER' // این مقدار رو باید موقع شروع OAuth ساختید و نگه دارید
+    const client_secret = 'cnvcaA1nKcNZ8K3nKnr9DGbGR83CJFUpDhDizhweHGFSGBHoe59eb519'
 
     // ساخت Base64 برای client_id:client_secret
     const credentials = btoa(`${client_id}:${client_secret}`)
